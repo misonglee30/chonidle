@@ -31,7 +31,13 @@ yarn-error.*
 *.pem
 
 # local env files
-.env*.local
+# .env 를 포함해 전부 제외한다 — 기상청 인증키가 깃허브에 공개되면 안 된다
+.env
+.env.*
+!.env.example
+
+# Netlify
+.netlify/
 
 # typescript
 *.tsbuildinfo

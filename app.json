@@ -23,7 +23,10 @@
       "output": "static",
       "favicon": "./assets/images/favicon.png"
     },
-    "plugins": [
+    "plugins": [[
+        "expo-location",
+        { "locationWhenInUsePermission": "지금 계신 지역의 날씨로 옷차림을 추천해드려요." }
+      ],
       "expo-router",
       [
         "expo-splash-screen",
@@ -37,6 +40,13 @@
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
-    }
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "a0afc1a3-01d5-415f-a2c0-01231582171a"
+      }
+    },
+    "owner": "chonidle"
   }
 }

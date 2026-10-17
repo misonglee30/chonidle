@@ -1,0 +1,32 @@
+# Netlify 배포 설정
+#
+# 깃에 push 하면 Netlify가 이 파일을 보고 알아서 빌드·배포한다.
+#  · command  : 웹용 정적 파일을 만드는 명령
+#  · publish  : 그 결과가 들어가는 폴더
+#  · functions: 기상청 중계 함수가 들어 있는 폴더
+
+[build]
+  command = "npx expo export -p web"
+  publish = "dist"
+  functions = "netlify/functions"
+
+[build.environment]
+  # Expo SDK 57은 Node 20 이상이 필요하다
+  NODE_VERSION = "20"
+
+[functions]
+  node_bundler = "esbuild"
+
+# 규칙은 위에서부터 먼저 맞는 것이 적용된다.
+# 중계 함수 주소가 반드시 아래 '전부 index.html' 규칙보다 위에 있어야 한다.
+[[redirects]]
+  from = "/api/kma"
+  to = "/.netlify/functions/kma"
+  status = 200
+
+# PWA는 화면 이동을 앱이 직접 처리한다.
+# /forecast 같은 주소를 새로고침해도 index.html을 돌려줘야 흰 화면이 안 뜬다.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
